@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="OQCTester.ProfileSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OQCTester"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" Margin="10">
+            <DockPanel Background="LightGray">
+                <materialDesign:PackIcon Kind="Magnify" Width="24" Height="24" Margin="10 3" VerticalAlignment="Center" Background="Transparent"/>
+                <materialDesign:PackIcon Kind="QrcodeScan" Width="24" Height="24" Margin="10 3" VerticalAlignment="Center" Cursor="Hand" Background="Transparent" PreviewMouseDown="ScanQr"/>
+                <materialDesign:PackIcon DockPanel.Dock="Right" Kind="Close" Width="24" Height="24" Margin="10 3" PreviewMouseDown="ClearSelection" VerticalAlignment="Center" Cursor="Hand" Background="Transparent"/>
+                <TextBox Margin="10 10"  FontSize="18" Name="FilterTextBox" KeyUp="FilterTextBox_OnKeyUp" LostFocus="FilterTextBox_OnLostFocus" GotFocus="FilterTextBox_OnGotFocus">Select process or use filter</TextBox>
+            </DockPanel>
+        </DockPanel>
+        <DockPanel>
+            <DockPanel Margin="0 0 50 0">
+                <TreeView  DockPanel.Dock="Top" SelectedItemChanged="TreeView_OnSelectedItemChanged" MouseDoubleClick="TreeView_OnMouseDoubleClick" Name="TreeView"/>
+                <Button DockPanel.Dock="Top" Margin="0 10" PreviewMouseDown="UIElement_OnMouseDown">+ Add profile</Button>
+                <Button DockPanel.Dock="Top" PreviewMouseDown="UIElement_OnMouseDown">+ Add Product</Button>
+                <Label></Label>
+            </DockPanel>
+            <Label Name="Message" Margin="30 100" FontSize="20" >No results found</Label>
+            <DockPanel Name="Results">
+                <Grid Name="Preview">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                <Label DockPanel.Dock="Top" Name="Type" FontSize="14"></Label>
+                <Label DockPanel.Dock="Top" Grid.Row="1" Name="Name" FontSize="16" FontWeight="Bold"></Label>
+                <Label DockPanel.Dock="Top" Foreground="DimGray" Grid.Row="2" Name="Property1Name"></Label>
+                <Label DockPanel.Dock="Top" Grid.Row="2" Grid.Column="1" Name="Property1"></Label>
+                    <Label DockPanel.Dock="Top" Foreground="DimGray" Grid.Row="3" Name="Property2Name"></Label>
+                <Label DockPanel.Dock="Top" Grid.Row="3" Grid.Column="1" Name="Property2"></Label>
+                    <Label DockPanel.Dock="Top" Foreground="DimGray" Grid.Row="4" Name="Property3Name"></Label>
+                <Label DockPanel.Dock="Top" Grid.Row="4" Grid.Column="1" Name="Property3"></Label>
+                    <Label DockPanel.Dock="Top" Foreground="DimGray" Grid.Row="5" Name="Property4Name"></Label>
+                <Label DockPanel.Dock="Top" Grid.Row="5" Grid.Column="1" Name="Property4"></Label>
+                    <Label DockPanel.Dock="Top" Foreground="DimGray" Grid.Row="6" Name="Property5Name"></Label>
+                <Label DockPanel.Dock="Top" Grid.Row="6" Grid.Column="1" Name="Property5"></Label>
+                    <Label DockPanel.Dock="Top" Foreground="DimGray" Grid.Row="7" Name="Property6Name"></Label>
+                <Label DockPanel.Dock="Top" Grid.Row="7" Grid.Column="1" Name="Property6"></Label>
+                    <Label DockPanel.Dock="Top" Foreground="DimGray" Grid.Row="8" Name="Property7Name"></Label>
+                <Label DockPanel.Dock="Top" Grid.Row="8" Grid.Column="1" Name="Property7"></Label>
+                    <Label DockPanel.Dock="Top" Foreground="DimGray" Grid.Row="9" Name="Property8Name"></Label>
+                <Label DockPanel.Dock="Top" Grid.Row="9" Grid.Column="1" Name="Property8"></Label>
+                    <Label DockPanel.Dock="Top" Foreground="DimGray" Grid.Row="10" Name="Property9Name"></Label>
+                <Label DockPanel.Dock="Top" Grid.Row="10" Grid.Column="1" Name="Property9"></Label>
+                    <Label DockPanel.Dock="Top" Foreground="DimGray" Grid.Row="11" Name="Property10Name"></Label>
+                <Label DockPanel.Dock="Top" Grid.Row="11" Grid.Column="1" Name="Property10"></Label>
+                    <Button PreviewMouseDown="UIElement_OnMouseDown" Grid.Row="12" Visibility="Collapsed" Name="EditButton">Edit</Button>
+                </Grid>
+                <Label/>
+            </DockPanel>
+        </DockPanel>
+    </DockPanel>
+</UserControl>

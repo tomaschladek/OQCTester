@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="OQCTester.ExecutionPlanEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OQCTester"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <DockPanel>
+        <materialDesign:ColorZone DockPanel.Dock="Top" Mode="PrimaryLight">
+            <Label Margin="10 3">Execution plan editor</Label>
+        </materialDesign:ColorZone>
+        <WrapPanel DockPanel.Dock="Top">
+            <DockPanel>
+                <ListBox Name="ExecutionPlan" SelectionChanged="ExecutionPlan_OnSelectionChanged" BorderThickness="0 0 1 0" BorderBrush="LightBlue">
+                    <ListBoxItem Width="90" Style="{StaticResource ListboxItemWithoutColor}" Background="AliceBlue">Action 1</ListBoxItem>
+                    <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightYellow">Test 1.0</ListBoxItem>
+                    <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightYellow">Test 1.1</ListBoxItem>
+                    <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightYellow">Test 1.2</ListBoxItem>
+                    <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="AliceBlue">Action 2</ListBoxItem>
+                    <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightYellow">Test 2.1</ListBoxItem>
+                    <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightYellow">Test 2.2</ListBoxItem>
+                    <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="AliceBlue">Action 3</ListBoxItem>
+                    <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightYellow">Test 3.1</ListBoxItem>
+                    <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightYellow">Test 3.2</ListBoxItem>
+                    <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightYellow">Test 3.3</ListBoxItem>
+                    <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightYellow">Test 3.4</ListBoxItem>
+                    <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightYellow">Test 3.5</ListBoxItem>
+                </ListBox>
+            </DockPanel>
+            <Grid  Margin="0 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                </Grid.RowDefinitions>
+                <Label Name="Key1" Content="Min value" Style="{StaticResource GridKey}" Grid.Row="0"/>
+                <Label Name="Value1" Content="50" Style="{StaticResource GridValueUnit}" Grid.Row="0"/>
+                <Label Name="Unit1" Content="mA" Style="{StaticResource GridUnit}" Grid.Row="0"/>
+                <Label Name="Key2" Content="Max value" Style="{StaticResource GridKey}" Grid.Row="1"/>
+                <Label Name="Value2" Content="250" Style="{StaticResource GridValueUnit}" Grid.Row="1"/>
+                <Label Name="Unit2" Content="mA" Style="{StaticResource GridUnit}" Grid.Row="1"/>
+                <Label Name="Key3" Content="Steps" Style="{StaticResource GridKey}" Grid.Row="2"/>
+                <Label Name="Value3" Content="10" Style="{StaticResource GridValueUnit}" Grid.Row="2"/>
+                <Label Name="Unit3" Content="#" Style="{StaticResource GridUnit}" Grid.Row="2"/>
+                <Label Name="Key4" Content="Settle time" Style="{StaticResource GridKey}" Grid.Row="3"/>
+                <Label Name="Value4" Content="100" Style="{StaticResource GridValueUnit}" Grid.Row="3"/>
+                <Label Name="Unit4" Content="ms" Style="{StaticResource GridUnit}" Grid.Row="3"/>
+            </Grid>
+        </WrapPanel>
+        <Border  BorderThickness="0 1 0 0" BorderBrush="LightBlue">
+            <DockPanel DockPanel.Dock="Top" Margin="15">
+                <WrapPanel  Cursor="Hand" Background="Transparent" PreviewMouseDown="AddItem" Margin="20 0">
+                    <materialDesign:PackIcon Kind="Plus" Width="24" Height="24" Margin="10 3 0 3" Cursor="Hand" Background="Transparent"/>
+                    <Label VerticalAlignment="Center">ADD</Label>
+                </WrapPanel>
+                <WrapPanel  Cursor="Hand" Background="Transparent" PreviewMouseDown="EditItem" Margin="20 0">
+                    <materialDesign:PackIcon Kind="Pencil" Width="24" Height="24" Margin="10 3 0 3" Cursor="Hand" Background="Transparent"/>
+                    <Label VerticalAlignment="Center">EDIT</Label>
+                </WrapPanel>
+                <WrapPanel  Cursor="Hand" Background="Transparent" PreviewMouseDown="RemoveItem" Margin="20 0">
+                    <materialDesign:PackIcon Kind="Minus" Width="24" Height="24" Margin="10 3 0 3" Cursor="Hand" Background="Transparent"/>
+                    <Label VerticalAlignment="Center">REMOVE</Label>
+                </WrapPanel>
+                <WrapPanel  Cursor="Hand" Background="Transparent" PreviewMouseDown="RevertItem" Margin="20 0">
+                    <materialDesign:PackIcon Kind="Undo" Width="24" Height="24" Margin="10 3 0 3" Cursor="Hand" Background="Transparent"/>
+                    <Label VerticalAlignment="Center">REVERT</Label>
+                </WrapPanel>
+            </DockPanel>
+        </Border>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,215 @@
+﻿<UserControl x:Class="OQCTester.ProductViewer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OQCTester"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Label VerticalAlignment="Center" Margin="5 10 15 0">Serial number</Label>
+
+            <DockPanel Margin="3" Background="LightGray">
+                <materialDesign:PackIcon Kind="Magnify" Width="24" Height="24" Margin="10 3"
+                                         VerticalAlignment="Center" Cursor="Hand" Background="Transparent"/>
+                <materialDesign:PackIcon Kind="QrcodeScan" Width="24" Height="24" Margin="10 3"
+                                         VerticalAlignment="Center" Cursor="Hand" Background="Transparent"
+                                         PreviewMouseDown="ScanQr" />
+                <materialDesign:PackIcon DockPanel.Dock="Right" Kind="Close" Width="24" Height="24" Margin="10 3"
+                                         PreviewMouseDown="ClearSelection" VerticalAlignment="Center" Cursor="Hand"
+                                         Background="Transparent" />
+                <TextBox Margin="10 10" FontSize="18" Name="FilterTextBox" PreviewKeyUp="FilterTextBox_OnPreviewKeyUp"
+                         GotFocus="FilterTextBox_OnGotFocus" LostFocus="FilterTextBox_OnLostFocus" /></DockPanel>
+        </DockPanel>
+        <Label Name="Message" Margin="30 100" FontSize="20" >No results found</Label>
+        <DockPanel Name="ProductDetails" Visibility="Collapsed">
+            <ListBox Margin="10 10 0 0" SelectionChanged="Selector_OnSelectionChanged" Name="Profiles">
+                <ListBoxItem FontWeight="Bold" Background="LimeGreen" Padding="10 10 30 10" Margin="0 1" >Soft test</ListBoxItem>
+                <ListBoxItem FontWeight="Bold" Background="PaleVioletRed" Padding="10 10 30 10" Margin="0 1" >Calibration</ListBoxItem>
+                <ListBoxItem FontWeight="Bold" Background="LimeGreen" Padding="10 10 30 10" Margin="0 1" >Hard test</ListBoxItem>
+            </ListBox>
+            <ListBox Name="ExecutionPlan" SelectionChanged="ExecutionPlan_OnSelectionChanged" Margin="3 10 20 0">
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightGreen">Overview</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightGreen">Metadata</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightGreen">Action 1</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColorTest}" Background="LightGreen">Test 1.1</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColorTest}" Background="LightGreen">Test 1.2</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColorTest}" Background="LightGreen">Test 1.3</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightGreen">Action 2</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColorTest}" Background="LightGreen">Test 2.1</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColorTest}" Background="LightGreen">Test 2.2</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColor}" Background="LightGreen">Action 3</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColorTest}" Background="LightGreen">Test 3.1</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColorTest}" Background="LightGreen">Test 3.2</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColorTest}" Background="LightGreen">Test 3.3</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColorTest}" Background="LightGreen">Test 3.4</ListBoxItem>
+                <ListBoxItem  Style="{StaticResource ListboxItemWithoutColorTest}" Background="LightGreen">Test 3.5</ListBoxItem>
+            </ListBox>
+
+            <ScrollViewer IsTabStop="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <DockPanel>
+                    <Grid Name="Metadata">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Label>Measured</Label>
+                        <Label Grid.Column="1">12.11.2018 11:28:36</Label>
+                        <Label Grid.Row="1">Operator</Label>
+                        <Label Grid.Row="1" Grid.Column="1">Tomas Chladek</Label>
+                        <Label Grid.Row="2">Setup</Label>
+                        <Label Grid.Row="2" Grid.Column="1">PC 3</Label>
+                        <Label Grid.Row="3">Batch</Label>
+                        <Label Grid.Row="3" Grid.Column="1">OWO13245</Label>
+                    </Grid>
+                    <DockPanel Name="Data">
+                        <Label Name="Header1" FontSize="16" DockPanel.Dock="Top">Measured data</Label>
+                        <Grid DockPanel.Dock="Top">
+                            <DataGrid Name="DataGridLayout" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Step ID [#]" Binding="{Binding StepId}" MinWidth="100">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Current [mA]" Binding="{Binding Current}" MinWidth="100">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Hall [a.u.]" Binding="{Binding Hall}" MinWidth="100">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Temperature [°C]" Binding="{Binding Temperature}"
+                                                        MinWidth="100">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                        <Label Name="Header2" FontSize="16" Margin="0 30 0 0" DockPanel.Dock="Top">Parameters</Label>
+                        <Label Name="Description" Margin="0 10" DockPanel.Dock="Top" />
+                        <DockPanel DockPanel.Dock="Top">
+                            <DataGrid Name="DataGridParametersLayout" AutoGenerateColumns="False" DockPanel.Dock="Top">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Min current [mA]" Binding="{Binding Min}" MinWidth="100">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Max current [mA]" Binding="{Binding Max}" MinWidth="100">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Steps [#]" Binding="{Binding Steps}" MinWidth="100">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Settle time [ms]" Binding="{Binding SettleTime}"
+                                                        MinWidth="100">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <DataGrid Name="DataGridParametersTestLayout" AutoGenerateColumns="False" DockPanel.Dock="Top">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Threshold" Binding="{Binding Threshold}" MinWidth="100">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Operator" Binding="{Binding Operator}" MinWidth="100">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Is Absolute value" Binding="{Binding IsAbsolute}"
+                                                        MinWidth="100">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Data field" Binding="{Binding DataField}" MinWidth="100">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalContentAlignment"
+                                                        Value="Center" />
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                        <Label Name="Header3" FontSize="16" Margin="0 30 0 0" DockPanel.Dock="Top">Measured data charts</Label>
+                        <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Label VerticalAlignment="Center">Values </Label>
+                            <ComboBox Margin="10" Name="ChartValues" SelectionChanged="ChartValues_OnSelectionChanged" Width="150">
+                                <ComboBoxItem>Current</ComboBoxItem>
+                                <ComboBoxItem>Temperature</ComboBoxItem>
+                                <ComboBoxItem>Hall</ComboBoxItem>
+                                <ComboBoxItem>Step ID</ComboBoxItem>
+                            </ComboBox>
+                        </DockPanel>
+                        <wpf:CartesianChart x:Name="DataChart" LegendLocation="Right" DockPanel.Dock="Top" MinHeight="300">
+                            <wpf:CartesianChart.AxisY>
+                                <wpf:Axis Title="Value"></wpf:Axis>
+                            </wpf:CartesianChart.AxisY>
+                            <wpf:CartesianChart.AxisX>
+                                <wpf:Axis Title="Step ID"></wpf:Axis>
+                            </wpf:CartesianChart.AxisX>
+                        </wpf:CartesianChart>
+                    </DockPanel>
+                </DockPanel>
+            </ScrollViewer>
+        </DockPanel>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="OQCTester.MetadataEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OQCTester"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <DockPanel>
+        <materialDesign:ColorZone DockPanel.Dock="Top" Mode="PrimaryLight">
+            <Label Margin="10 3">Metadata editor</Label>
+        </materialDesign:ColorZone>
+        <WrapPanel DockPanel.Dock="Top">
+            <Grid Margin="0 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                </Grid.RowDefinitions>
+                <Label Content="Product" Style="{StaticResource GridKey}" Grid.Row="0"/>
+                <Label Name="ProductLabel" Content="Awesome product" Style="{StaticResource GridValue}" Grid.Row="0"/>
+                <Label Content="Name" Style="{StaticResource GridKey}" Grid.Row="1"/>
+                <Label Name="NameLabel" Content="Soft test" Style="{StaticResource GridValue}" Grid.Row="1"/>
+                <Label Content="Version" Style="{StaticResource GridKey}" Grid.Row="2"/>
+                <Label Name="VersionLabel" Content="9" Style="{StaticResource GridValue}" Grid.Row="2"/>
+                <Label Content="Description" Style="{StaticResource GridKey}" Grid.Row="3"/>
+                <Label Name="DescriptionLabel" Content="Low level verification of functionality" Style="{StaticResource GridValue}" Grid.Row="3"/>
+            </Grid>
+        </WrapPanel>
+        <Border  BorderThickness="0 1 0 0" BorderBrush="LightBlue">
+            <DockPanel DockPanel.Dock="Top" Margin="15">
+                <WrapPanel Cursor="Hand" Background="Transparent" PreviewMouseDown="EditMetadata">
+                    <materialDesign:PackIcon Kind="Pencil" Width="24" Height="24" Margin="10 3 0 3" Cursor="Hand" Background="Transparent"/>
+                    <Label VerticalAlignment="Center">EDIT</Label>
+                </WrapPanel>
+                <WrapPanel  Cursor="Hand" Background="Transparent" PreviewMouseDown="RevertItem" Margin="20 0">
+                    <materialDesign:PackIcon Kind="Undo" Width="24" Height="24" Margin="10 3 0 3" Cursor="Hand" Background="Transparent"/>
+                    <Label VerticalAlignment="Center">REVERT</Label>
+                </WrapPanel>
+            </DockPanel>
+
+        </Border>
+    </DockPanel>
+</UserControl>

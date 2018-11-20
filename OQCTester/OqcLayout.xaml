@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="OQCTester.OqcLayout"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OQCTester"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <DockPanel>
+        <StackPanel CanHorizontallyScroll="True" CanVerticallyScroll="True">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRowEmpty}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRowEmpty}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                </Grid.RowDefinitions>
+                <Label Content="System" Style="{StaticResource GridKey}" Grid.Row="0"/>
+                <Label Content="Stopped" Style="{StaticResource GridValue}" Grid.Row="0" Name="SystemValue"/>
+                <Label Content="Devices" Style="{StaticResource GridKey}" Grid.Row="1"/>
+                <Label Content="Disconnected" Style="{StaticResource GridValue}"  Grid.Row="1" Name="DevicesValue"/>
+                <Label Content="Temperature" Style="{StaticResource GridKey}"  Grid.Row="3"/>
+                <Label Content="°C" Style="{StaticResource GridValue}" Grid.Row="3" Name="TemperatureValue"/>
+                <Label Content="Serial Number" Style="{StaticResource GridKey}" Grid.Row="5"/>
+                <Label Content="" Style="{StaticResource GridValue}" Grid.Row="5" Name="SerialNumberValue"/>
+                <Label Content="Batch ID"  Style="{StaticResource GridKey}" Grid.Row="6"/>
+                <Label Content=""  Style="{StaticResource GridValue}" Grid.Row="6" Name="BatchValue"/>
+                <Label Content="Comment"  Style="{StaticResource GridKey}" Grid.Row="7"/>
+                <Label Content=""  Style="{StaticResource GridValue}" Grid.Row="7" Name="CommentValue"/>
+                <Label Content="State" Style="{StaticResource GridKey}" Grid.Row="8"/>
+                <Label Content=""  Style="{StaticResource GridValue}" Grid.Row="8" Name="StateValue"/>
+                <Label Content="Session history"  Style="{StaticResource GridKey}" Grid.Row="9"/>
+                <Label Content="None" Style="{StaticResource GridValue}" Grid.Row="9" Name="SessionHistoryValue"/>
+                
+            </Grid>
+        </StackPanel>
+        <DockPanel Name="ContentContainer">
+            <DockPanel DockPanel.Dock="Top">
+                <WrapPanel DockPanel.Dock="Right"  Name="ProgressMenu"  Visibility="Collapsed" >
+                    <materialDesign:PackIcon Kind="Menu" Width="24" Height="24" Margin="20" Background="Transparent" PreviewMouseDown="ProgressMenu_OnPreviewMouseDown">
+                        <materialDesign:PackIcon.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Pause" PreviewMouseDown="UIElement_OnMouseDown"/>
+                                <MenuItem Header="Cancel" PreviewMouseDown="CancelExecution"/>
+                            </ContextMenu>
+                        </materialDesign:PackIcon.ContextMenu>
+                    </materialDesign:PackIcon>
+                </WrapPanel>
+                <StackPanel Margin="0 10 10 10" Name="ActionContainer"  Background="{StaticResource PrimaryHueMidBrush}" Cursor="Hand">
+                    <materialDesign:PackIcon Name="ActionIcon" Kind="QrcodeScan" Width="200" Height="200" Margin="0 30" HorizontalAlignment="Center" PreviewMouseDown="ActionIcon_OnPreviewMouseDown" Cursor="Hand" BorderThickness="0"/>
+                    <Button Name="ActionButton" PreviewMouseDown="UIElement_OnMouseDown" Content="Waiting for devices..." FontSize="100" BorderThickness="0"/>
+                </StackPanel>
+            </DockPanel>
+            <DockPanel Name="PositionLayout" Background="Transparent" MouseDown="PositionLayout_OnMouseDown" Cursor="Hand">
+                <DockPanel Name="ProgressContainer" VerticalAlignment="Center" HorizontalAlignment="Center" DockPanel.Dock="Top">
+                    <Grid Name="OriginalEllipse" Width="300" Height="300" DockPanel.Dock="Top">
+                        <Ellipse Fill="Gray" DockPanel.Dock="Top"/>
+                        <Ellipse Name="ProgressElipse" Width="0" Height="0" Fill="Green" DockPanel.Dock="Top"/>
+                        <TextBlock Name="ProgressText" HorizontalAlignment="Center" Text="0%" TextAlignment="Center" VerticalAlignment="Center" FontSize="60" Foreground="White"/>
+                    </Grid>
+                    <Label FontSize="84" Name="ProgressDuration" Foreground="Gray" FontWeight="Bold" HorizontalAlignment="Center">00:00</Label>
+                </DockPanel>
+                <DockPanel  DockPanel.Dock="Top" Name="ResultContainerPassed" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" Cursor="Hand" Background="Transparent">
+                    <materialDesign:PackIcon Kind="QrcodeScan" Width="200" Height="200" Margin="0 30" HorizontalAlignment="Center" PreviewMouseDown="UIElement_OnMouseDown" Cursor="Hand" BorderThickness="0" DockPanel.Dock="Top"/>
+                    <Label Foreground="White"  VerticalAlignment="Center" HorizontalAlignment="Center"  FontWeight="Bold" FontSize="100" DockPanel.Dock="Top">Passed</Label>
+                    <Label FontSize="84" Name="ProgressNegativeDuration" Foreground="White" HorizontalAlignment="Center" Margin="30"  DockPanel.Dock="Top">00:00</Label>
+                    <Label Foreground="White"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="48" DockPanel.Dock="Top">Scan next serial number product</Label>
+                </DockPanel>
+                <DockPanel  DockPanel.Dock="Top" Name="ResultContainerFailed" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" Cursor="Hand" Background="Transparent">
+                    <materialDesign:PackIcon Kind="QrcodeScan" Width="200" Height="200" Margin="0 30" HorizontalAlignment="Center" PreviewMouseDown="UIElement_OnMouseDown" Cursor="Hand" BorderThickness="0" DockPanel.Dock="Top"/>
+                    <Label Foreground="White"  VerticalAlignment="Center" HorizontalAlignment="Center"  FontWeight="Bold" FontSize="100" DockPanel.Dock="Top">FAILED - 13</Label>
+                    <Label FontSize="84" Name="ProgressNegativeDuration2" Foreground="White" HorizontalAlignment="Center" Margin="30"  DockPanel.Dock="Top">00:00</Label>
+                    <Label Foreground="White"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="48" DockPanel.Dock="Top">Scan next serial number product</Label>
+                </DockPanel>
+            </DockPanel>
+        </DockPanel>
+        
+    </DockPanel>
+</UserControl>

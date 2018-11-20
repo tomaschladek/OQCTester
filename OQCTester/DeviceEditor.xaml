@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="OQCTester.DeviceEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OQCTester"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <DockPanel>
+        <materialDesign:ColorZone DockPanel.Dock="Top" Mode="PrimaryLight">
+            <Label Margin="10 3">Device editor</Label>
+        </materialDesign:ColorZone>
+        <WrapPanel DockPanel.Dock="Top">
+            <DockPanel>
+                <Border  BorderThickness="0 0 1 0" BorderBrush="LightBlue">
+                    <ListBox Name="Devices" SelectionChanged="Selector_OnSelectionChanged" Margin="0 0 30 0"/>
+                </Border>
+            </DockPanel>
+            <Grid Margin="0 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                    <RowDefinition Style="{StaticResource GridOqcRow}"/>
+                </Grid.RowDefinitions>
+                <Label Name="Key1" Content="IP Address" Style="{StaticResource GridKey}" Grid.Row="0"/>
+                <Label Name="Value1" Content="127.8.2.136" Style="{StaticResource GridValue}" Grid.Row="0"/>
+                <Label Name="Key2" Content="Port" Style="{StaticResource GridKey}" Grid.Row="1"/>
+                <Label Name="Value2" Content="177" Style="{StaticResource GridValue}" Grid.Row="1"/>
+                <Label Name="Key3" Content="Product configuration" Style="{StaticResource GridKey}" Grid.Row="2"/>
+                <Label Name="Value3" Content="1" Style="{StaticResource GridValue}" Grid.Row="2"/>
+                <Label Content="a.u." Style="{StaticResource GridUnit}" Grid.Row="2"/>
+                <Label Name="Key4" Content="Address offset" Style="{StaticResource GridKey}" Grid.Row="3"/>
+                <Label Name="Value4" Content="120" Style="{StaticResource GridValue}" Grid.Row="3"/>
+                <Label Content="a.u." Style="{StaticResource GridUnit}" Grid.Row="3"/>
+            </Grid>
+        </WrapPanel>
+        <Border  BorderThickness="0 1 0 0" BorderBrush="LightBlue">
+            <DockPanel DockPanel.Dock="Top" Margin="15">
+                <WrapPanel  Cursor="Hand" Background="Transparent" PreviewMouseDown="AddDevice" Margin="20 0">
+                    <materialDesign:PackIcon Kind="Plus" Width="24" Height="24" Margin="10 3 0 3" Cursor="Hand" Background="Transparent"/>
+                    <Label VerticalAlignment="Center">ADD</Label>
+                </WrapPanel>
+                <WrapPanel  Cursor="Hand" Background="Transparent" PreviewMouseDown="EditDevice" Margin="20 0">
+                  <materialDesign:PackIcon Kind="Pencil" Width="24" Height="24" Margin="10 3 0 3" Cursor="Hand" Background="Transparent"/>
+                    <Label VerticalAlignment="Center">EDIT</Label>
+                </WrapPanel>
+                <WrapPanel  Cursor="Hand" Background="Transparent" PreviewMouseDown="RemoveDevice" Margin="20 0">
+                    <materialDesign:PackIcon Kind="Minus" Width="24" Height="24" Margin="10 3 0 3" Cursor="Hand" Background="Transparent"/>
+                    <Label VerticalAlignment="Center">REMOVE</Label>
+                </WrapPanel>
+                <WrapPanel  Cursor="Hand" Background="Transparent" PreviewMouseDown="RevertItem" Margin="20 0">
+                    <materialDesign:PackIcon Kind="Undo" Width="24" Height="24" Margin="10 3 0 3" Cursor="Hand" Background="Transparent"/>
+                    <Label VerticalAlignment="Center">REVERT</Label>
+                </WrapPanel>
+            </DockPanel>
+        </Border>
+    </DockPanel>
+</UserControl>

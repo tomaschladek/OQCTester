@@ -1,0 +1,74 @@
+﻿<Application x:Class="OQCTester.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:OQCTester"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="GridKey" TargetType="Label">
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="Margin" Value="20 0 15 0"/>
+                <Setter Property="Foreground" Value="Gray"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="GridValue" TargetType="Label">
+                <Setter Property="Grid.Column" Value="1"/>
+                <Setter Property="Margin" Value="0 0 20 0"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="GridValueUnit" TargetType="Label">
+                <Setter Property="Grid.Column" Value="1"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="GridUnit" TargetType="Label">
+                <Setter Property="Grid.Column" Value="2"/>
+                <Setter Property="Margin" Value="0 0 20 0"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="Gray"/>
+            </Style>
+            <Style x:Key="GridValueTextBox" TargetType="TextBox">
+                <Setter Property="Grid.Column" Value="1"/>
+                <Setter Property="Margin" Value="0 3 0 3"/>
+                <Setter Property="Padding" Value="3 5 15 5"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Height" Value="30"/>
+            </Style>
+            <Style x:Key="ListboxItemWithoutColor" TargetType="ListBoxItem">
+                <Setter Property="Margin" Value="0 0 0 0"/>
+                <Setter Property="Padding" Value="15 5 0 5"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style x:Key="ListboxItemWithoutColorTest" TargetType="ListBoxItem">
+                <Setter Property="Margin" Value="5 0 0 0"/>
+                <Setter Property="Padding" Value="20 5 20 5"/>
+            </Style>
+            <Style x:Key="GridOqcColumn" TargetType="ColumnDefinition">
+            </Style>
+            <Style x:Key="GridOqcRow" TargetType="RowDefinition">
+                <Setter Property="Height" Value="30"/>
+            </Style>
+            <Style x:Key="GridOqcTextBox" TargetType="RowDefinition">
+                <Setter Property="Height" Value="45"/>
+            </Style>
+            <Style x:Key="GridOqcComboBox" TargetType="RowDefinition">
+                <Setter Property="Height" Value="40"/>
+            </Style>
+            <Style x:Key="GridOqcRowEmpty" TargetType="RowDefinition">
+                <Setter Property="Height" Value="20"/>
+            </Style>
+            <Style x:Key="LinkTreeView" TargetType="TreeViewItem" BasedOn="{StaticResource MaterialDesignTreeViewItem}">
+                <Setter Property="Foreground" Value="Blue"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Margin" Value="10 3"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="OQCTester.ProcessEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OQCTester"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <DockPanel>
+        <local:ProfileSelector DockPanel.Dock="Top" Loaded="ProfileSelector_Loaded" x:Name="SelectorView"></local:ProfileSelector>
+        <DockPanel DockPanel.Dock="Top" Name="Editor" Visibility="Collapsed">
+            <Border  BorderThickness="0 0 1 0" BorderBrush="LightBlue">
+                <ListBox Name="Section" SelectionChanged="Selector_OnSelectionChanged" Margin="10 30 30 10">
+                    <ListBoxItem>Metadata</ListBoxItem>
+                    <ListBoxItem>Physical properties</ListBoxItem>
+                    <ListBoxItem>Setup</ListBoxItem>
+                    <ListBoxItem>Devices</ListBoxItem>
+                    <ListBoxItem>Execution plan</ListBoxItem>
+                    <ListBoxItem>Discoverability</ListBoxItem>
+                </ListBox>
+            </Border>
+            <StackPanel>
+                <DockPanel Name="Metadata">
+                    <local:MetadataEditor/>
+                </DockPanel>
+                <DockPanel Name="PhysicalProperties" Visibility="Collapsed">
+                    <local:PhysicalPropertiesView/>
+                </DockPanel>
+                <DockPanel Name="Setup"  Visibility="Collapsed">
+                    <local:SetupView/>
+                </DockPanel>
+                <DockPanel Name="Devices" Visibility="Collapsed">
+                    <local:DeviceEditor/>
+                </DockPanel>
+                <DockPanel Name="ExecutionPlan" Visibility="Collapsed">
+                    <local:ExecutionPlanEditor/>
+                </DockPanel>
+                <DockPanel Name="Discoverability" Visibility="Collapsed">
+                    <local:DiscoverabilityEditor/>
+                </DockPanel>
+            </StackPanel>
+        </DockPanel>
+        <Border  BorderThickness="0 1 0 0" BorderBrush="LightBlue"  x:Name="SaveCancelContainer" Visibility="Collapsed">
+            <WrapPanel DockPanel.Dock="Top" FlowDirection="LeftToRight" Margin="0 15">
+                <Button Margin="10 3" Padding="30 0" Content="Save" PreviewMouseDown="UIElement_OnMouseLeftButtonDown" />
+                <Button Margin="10 3" Content="Cancel" PreviewMouseDown="CancelAction" />
+            </WrapPanel>
+        </Border>
+    </DockPanel>
+</UserControl>
